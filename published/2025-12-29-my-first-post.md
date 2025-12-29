@@ -35,6 +35,12 @@ graph TD;
     E --> D[End];
 ```
 
+## Sample Image
+
+Here's an image to test:
+
+![Placeholder Image](https://via.placeholder.com/600x400 "A nice placeholder image")
+
 You can find more information about [Markdown](https://www.markdownguide.org/) here.
 
 This is the end of the post.
