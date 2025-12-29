@@ -39,7 +39,7 @@ graph TD;
 
 Here's a local image to test:
 
-![Placeholder Image](./local-image.png "A nice local placeholder image")
+![Placeholder Image](./test-image-sticker.jpg "A nice local placeholder image")
 
 You can find more information about [Markdown](https://www.markdownguide.org/) here.
 
