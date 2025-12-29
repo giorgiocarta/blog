@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="../../static/style.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="../../index.html">Home</a>
-        </nav>
-    </header>
-    <main>
-        <article>
-            <h1>{{ title }}</h1>
-            <p class="post-meta">Published on: {{ date }}</p>
-            <div class="post-content">
-                {{ content | safe }}
-            </div>
-        </article>
-    </main>
-    <footer>
-        <p>&copy; {{ current_year }} My Blog</p>
-    </footer>
+{% extends "base.html" %}
 
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>
-      mermaid.initialize({ startOnLoad: true });
-      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-    </script>
-</body>
-</html>
+{% block title %}{{ title }} - My Blog{% endblock %}
+
+{% block content %}
+<article>
+    <h1>{{ title }}</h1>
+    <p class="post-meta">Published on: {{ date }}</p>
+    <div class="post-content">
+        {{ content | safe }}
+    </div>
+</article>
+{% endblock %}

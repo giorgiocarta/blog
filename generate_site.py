@@ -108,11 +108,13 @@ def generate_site():
     clean_output_dir()
     copy_static_assets()
 
+    base_template = env.get_template('base.html')
     post_template = env.get_template('post.html')
     index_template = env.get_template('index.html')
 
     posts_metadata = []
 
+    # First pass: gather all post metadata
     for post_dir in os.listdir(PUBLISHED_DIR):
         source_post_path = os.path.join(PUBLISHED_DIR, post_dir)
         if os.path.isdir(source_post_path):
@@ -123,54 +125,74 @@ def generate_site():
                     break
             
             if not md_file:
-                print(f"Warning: No markdown file found in directory {source_post_path}")
                 continue
 
             filepath = os.path.join(source_post_path, md_file)
             post_data = parse_markdown_file(filepath)
             
-            html_content = md.render(post_data['content'])
-            
-            post_date_obj = post_data['date']
-            
-            dest_post_path = os.path.join(OUTPUT_DIR, 'posts', post_dir)
-            os.makedirs(dest_post_path, exist_ok=True)
-
-            # Copy assets
-            for item in os.listdir(source_post_path):
-                if not item.endswith('.md'):
-                    s = os.path.join(source_post_path, item)
-                    d = os.path.join(dest_post_path, item)
-                    if os.path.isdir(s):
-                        shutil.copytree(s, d, dirs_exist_ok=True)
-                    else:
-                        shutil.copy2(s, d)
-
-            output_filepath = os.path.join(dest_post_path, 'index.html')
-
-            with open(output_filepath, 'w', encoding='utf-8') as f:
-                f.write(post_template.render(
-                    title=post_data['title'],
-                    date=post_data['date'].strftime('%Y-%m-%d'),
-                    content=html_content,
-                    current_year=datetime.now().year
-                ))
-            print(f"Generated post: {output_filepath}")
-
             posts_metadata.append({
                 'title': post_data['title'],
-                'date': post_date_obj,
-                'url': f'posts/{post_dir}/'
+                'date': post_data['date'],
+                'url': f'posts/{post_dir}/',
+                'source_path': source_post_path,
+                'md_file': md_file
             })
 
+    # Sort posts by date, newest first
     posts_metadata.sort(key=lambda x: x['date'], reverse=True)
 
-    for post in posts_metadata:
-        post['date'] = post['date'].strftime('%Y-%m-%d')
+    # Second pass: generate all post pages
+    for post_meta in posts_metadata:
+        source_post_path = post_meta['source_path']
+        md_file = post_meta['md_file']
+        
+        filepath = os.path.join(source_post_path, md_file)
+        post_data = parse_markdown_file(filepath)
+        
+        html_content = md.render(post_data['content'])
+        
+        dest_post_path = os.path.join(OUTPUT_DIR, post_meta['url'])
+        os.makedirs(dest_post_path, exist_ok=True)
 
+        # Copy assets
+        for item in os.listdir(source_post_path):
+            if not item.endswith('.md'):
+                s = os.path.join(source_post_path, item)
+                d = os.path.join(dest_post_path, item)
+                if os.path.isdir(s):
+                    shutil.copytree(s, d, dirs_exist_ok=True)
+                else:
+                    shutil.copy2(s, d)
+
+        output_filepath = os.path.join(dest_post_path, 'index.html')
+
+        with open(output_filepath, 'w', encoding='utf-8') as f:
+            f.write(post_template.render(
+                title=post_data['title'],
+                date=post_data['date'].strftime('%Y-%m-%d'),
+                content=html_content,
+                posts=posts_metadata, # Pass all posts for navigation
+                root_path='../../' # Path to root from post page
+            ))
+        print(f"Generated post: {output_filepath}")
+
+    # Read and convert about.md for the index page
+    about_content = ""
+    about_md_path = os.path.join(BASE_DIR, 'about.md')
+    if os.path.exists(about_md_path):
+        with open(about_md_path, 'r', encoding='utf-8') as f:
+            about_content = md.render(f.read())
+    else:
+        print("Warning: about.md not found.")
+
+    # Generate index page
     index_filepath = os.path.join(OUTPUT_DIR, 'index.html')
     with open(index_filepath, 'w', encoding='utf-8') as f:
-        f.write(index_template.render(posts=posts_metadata, current_year=datetime.now().year))
+        f.write(index_template.render(
+            posts=posts_metadata,
+            about_content=about_content,
+            root_path='./' # Path to root from index page
+        ))
     print(f"Generated index page: {index_filepath}")
 
 if __name__ == '__main__':
