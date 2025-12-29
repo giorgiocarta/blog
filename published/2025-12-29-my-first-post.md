@@ -22,6 +22,19 @@ if __name__ == "__main__":
     hello_world()
 ```
 
+## Mermaid Diagram
+
+Here is a sample Mermaid diagram:
+
+```mermaid
+graph TD;
+    A[Start] --> B{Is it?};
+    B -- Yes --> C[OK];
+    C --> D[End];
+    B -- No --> E[Not OK];
+    E --> D[End];
+```
+
 You can find more information about [Markdown](https://www.markdownguide.org/) here.
 
 This is the end of the post.

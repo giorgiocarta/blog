@@ -21,7 +21,11 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 def pygments_highlighter(code, lang, attrs):
     """
     Custom highlighter function for markdown-it-py using Pygments.
+    Handles Mermaid diagrams by not highlighting them.
     """
+    if lang == 'mermaid':
+        return f'<pre><code class="mermaid">{code}</code></pre>'
+
     if not lang:
         lang = 'text'  # Default to plain text if no language is specified
 
