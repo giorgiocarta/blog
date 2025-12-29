@@ -33,6 +33,15 @@
     <span class="n">hello_world</span><span class="p">()</span>
 </pre></div>
 </code></pre>
+<h2>Mermaid Diagram</h2>
+<p>Here is a sample Mermaid diagram:</p>
+<pre><code class="mermaid">graph TD;
+    A[Start] --> B{Is it?};
+    B -- Yes --> C[OK];
+    C --> D[End];
+    B -- No --> E[Not OK];
+    E --> D[End];
+</code></pre>
 <p>You can find more information about <a href="https://www.markdownguide.org/">Markdown</a> here.</p>
 <p>This is the end of the post.</p>
 
@@ -42,5 +51,11 @@
     <footer>
         <p>&copy; 2025 My Blog</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true });
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    </script>
 </body>
 </html>
