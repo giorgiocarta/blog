@@ -24,5 +24,11 @@
     <footer>
         <p>&copy; {{ current_year }} My Blog</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true });
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    </script>
 </body>
 </html>
