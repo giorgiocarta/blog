@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.9' # Use the same Python version as local venv
+        python-version: '3.11' # Use a more recent Python version
 
     - name: Install dependencies
       run: |
