@@ -1,0 +1,6 @@
+markdown-it-py
+Jinja2
+Pygments # For code highlighting, good for blog posts
+python-frontmatter # For parsing markdown front matter
+linkify-it-py # For auto-linking URLs
+markdown-it-pygments # For Pygments integration with markdown-it-py

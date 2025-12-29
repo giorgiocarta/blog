@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>My Blog</h1>
+        </nav>
+    </header>
+    <main>
+        <section class="posts-list">
+            {% for post in posts %}
+            <article class="post-item">
+                <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                <p class="post-meta">Published on: {{ post.date }}</p>
+            </article>
+            {% else %}
+            <p>No posts yet. Start writing!</p>
+            {% endfor %}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; {{ current_year }} My Blog</p>
+    </footer>
+</body>
+</html>

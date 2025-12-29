@@ -1,0 +1,37 @@
+# Gitignore for the blog project
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python/
+env/
+venv/
+
+# Node.js
+node_modules/
+
+# Mac
+.DS_Store
+
+# Gemini
+.gemini/
+.geminiignore
+
+# Output directory for the static site
+docs/
+build/
+public/
+
+# Editor files
+.obsidian/
+.vscode/
+
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*.temp
+.venv
