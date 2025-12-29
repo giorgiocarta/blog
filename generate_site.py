@@ -113,23 +113,45 @@ def generate_site():
 
     posts_metadata = []
 
-    for md_file in os.listdir(PUBLISHED_DIR):
-        if md_file.endswith('.md'):
-            filepath = os.path.join(PUBLISHED_DIR, md_file)
+    for post_dir in os.listdir(PUBLISHED_DIR):
+        source_post_path = os.path.join(PUBLISHED_DIR, post_dir)
+        if os.path.isdir(source_post_path):
+            md_file = None
+            for f in os.listdir(source_post_path):
+                if f.endswith('.md'):
+                    md_file = f
+                    break
+            
+            if not md_file:
+                print(f"Warning: No markdown file found in directory {source_post_path}")
+                continue
+
+            filepath = os.path.join(source_post_path, md_file)
             post_data = parse_markdown_file(filepath)
             
             html_content = md.render(post_data['content'])
             
-            # post_data['date'] is already a datetime object
             post_date_obj = post_data['date']
             
-            output_filename = md_file.replace('.md', '.html')
-            output_filepath = os.path.join(OUTPUT_DIR, 'posts', output_filename)
+            dest_post_path = os.path.join(OUTPUT_DIR, 'posts', post_dir)
+            os.makedirs(dest_post_path, exist_ok=True)
+
+            # Copy assets
+            for item in os.listdir(source_post_path):
+                if not item.endswith('.md'):
+                    s = os.path.join(source_post_path, item)
+                    d = os.path.join(dest_post_path, item)
+                    if os.path.isdir(s):
+                        shutil.copytree(s, d, dirs_exist_ok=True)
+                    else:
+                        shutil.copy2(s, d)
+
+            output_filepath = os.path.join(dest_post_path, 'index.html')
 
             with open(output_filepath, 'w', encoding='utf-8') as f:
                 f.write(post_template.render(
                     title=post_data['title'],
-                    date=post_data['date'].strftime('%Y-%m-%d'), # Format for display
+                    date=post_data['date'].strftime('%Y-%m-%d'),
                     content=html_content,
                     current_year=datetime.now().year
                 ))
@@ -137,18 +159,15 @@ def generate_site():
 
             posts_metadata.append({
                 'title': post_data['title'],
-                'date': post_date_obj, # Store datetime object for sorting
-                'url': f'posts/{output_filename}'
+                'date': post_date_obj,
+                'url': f'posts/{post_dir}/'
             })
 
-    # Sort posts by date, newest first
     posts_metadata.sort(key=lambda x: x['date'], reverse=True)
 
-    # Convert datetime objects back to string for rendering in index
     for post in posts_metadata:
         post['date'] = post['date'].strftime('%Y-%m-%d')
 
-    # Generate index page
     index_filepath = os.path.join(OUTPUT_DIR, 'index.html')
     with open(index_filepath, 'w', encoding='utf-8') as f:
         f.write(index_template.render(posts=posts_metadata, current_year=datetime.now().year))
