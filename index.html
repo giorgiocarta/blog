@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
-    <link rel="stylesheet" href="static/style.css">
+    <title>About Me - My Blog</title>
+    <link rel="stylesheet" href="./static/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <h1>My Blog</h1>
-        </nav>
-    </header>
-    <main>
-        <section class="posts-list">
+    <div class="container">
+        <aside class="sidebar">
+            <header>
+                <h1><a href="./index.html">My Blog</a></h1>
+            </header>
+            <nav>
+                <ul>
+                    
+                    <li><a href="./posts/my-second-post/">My Second Blog Post</a></li>
+                    
+                    <li><a href="./posts/my-first-post/">My First Blog Post</a></li>
+                    
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
             
-            <article class="post-item">
-                <h2><a href="posts/my-first-post/">My First Blog Post</a></h2>
-                <p class="post-meta">Published on: 2025-12-29</p>
-            </article>
-            
-            <article class="post-item">
-                <h2><a href="posts/my-second-post/">My Second  Blog Post</a></h2>
-                <p class="post-meta">Published on: 2025-12-29</p>
-            </article>
-            
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 My Blog</p>
-    </footer>
+<article>
+    <h1>About Me</h1>
+    <div class="post-content">
+        <h2>Welcome to my blog!</h2>
+<p>This is a personal blog where I share my thoughts on technology, programming, and other interests.</p>
+<p>Feel free to browse the posts on the left.</p>
+<p><em>This page can be edited by modifying the <code>about.md</code> file in the root of the project.</em></p>
+
+    </div>
+</article>
+
+        </main>
+    </div>
 </body>
 </html>

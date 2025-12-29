@@ -3,71 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Second  Blog Post</title>
+    <title>My Second Blog Post - My Blog</title>
     <link rel="stylesheet" href="../../static/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="../../index.html">Home</a>
-        </nav>
-    </header>
-    <main>
-        <article>
-            <h1>My Second  Blog Post</h1>
-            <p class="post-meta">Published on: 2025-12-29</p>
-            <div class="post-content">
-                <h1>SPOTAC</h1>
-<p>How to select you collaborator? This is a useful framework. Never hire and avoid collaborating with people withouth the following personality traits:</p>
+    <div class="container">
+        <aside class="sidebar">
+            <header>
+                <h1><a href="../../index.html">My Blog</a></h1>
+            </header>
+            <nav>
+                <ul>
+                    
+                    <li><a href="../../posts/my-second-post/">My Second Blog Post</a></li>
+                    
+                    <li><a href="../../posts/my-first-post/">My First Blog Post</a></li>
+                    
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            
+<article>
+    <h1>My Second Blog Post</h1>
+    <p class="post-meta">Published on: 2025-12-30</p>
+    <div class="post-content">
+        <h1>This is my second post!</h1>
+<p>Another exciting blog post. This one is about the wonders of <strong>static site generators</strong>.</p>
 <ul>
-<li>Smart</li>
-<li>Passionate</li>
-<li>Optimistic</li>
-<li>Tenacious</li>
-<li>Adatable</li>
-<li>Kind</li>
+<li>They are fast.</li>
+<li>They are secure.</li>
+<li>They are easy to deploy.</li>
 </ul>
-<h1>Welcome to my second blog post!</h1>
-<p>This is some <em>sample</em> content for my blog.</p>
-<p>Here's a list:</p>
-<ul>
-<li>Item 1</li>
-<li>Item 2</li>
-<li>Item 3</li>
-</ul>
-<p>And here's a code block to test Pygments highlighting:</p>
-<pre><code class="language-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;some_hash&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;dt&quot;</span><span class="p">:</span><span class="s2">&quot;some dates&quot;</span>
-<span class="p">}</span>
+<pre><code class="language-javascript"><div class="highlight"><pre><span></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hello from the second post!&quot;</span><span class="p">);</span>
 </pre></div>
 </code></pre>
-<h2>Mermaid Diagram</h2>
-<p>Here is a sample Mermaid diagram:</p>
-<pre><code class="mermaid">graph TD;
-    A[Start] --> B{Is it?};
-    B -- Yes --> C[OK];
-    C --> D[End];
-    B -- No --> E[Not OK];
-    E --> D[End];
-</code></pre>
-<h2>Sample Local Image</h2>
-<p>Here's a local image to test:</p>
-<p><img src="./test-image-sticker.jpg" alt="Placeholder Image" title="A nice local placeholder image" /></p>
-<p>You can find more information about <a href="https://www.markdownguide.org/">Markdown</a> here.</p>
-<p>This is the end of the post.</p>
+<p>This post also serves to test the navigation pane with multiple entries.</p>
 
-            </div>
-        </article>
-    </main>
-    <footer>
-        <p>&copy; 2025 My Blog</p>
-    </footer>
+    </div>
+</article>
 
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>
-      mermaid.initialize({ startOnLoad: true });
-      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-    </script>
+        </main>
+    </div>
 </body>
 </html>
